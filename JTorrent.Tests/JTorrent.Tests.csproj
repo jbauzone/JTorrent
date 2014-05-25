@@ -52,6 +52,12 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JTorrent\JTorrent.csproj">
+      <Project>{0b0bce61-3948-449d-b02d-763ccbb79915}</Project>
+      <Name>JTorrent %28JTorrent\JTorrent%29</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

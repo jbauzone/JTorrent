@@ -41,6 +41,15 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BEncoding\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\JTorrent.Commons\JTorrent.Commons.csproj">
+      <Project>{aa2fd4f4-af33-49f3-b6e4-964c30ae8039}</Project>
+      <Name>JTorrent.Commons</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
