@@ -2,6 +2,9 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using JTorrent.BEncode;
 using System.IO;
+using System.Text;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace JTorrent.Tests.BEncode {
 
@@ -63,6 +66,29 @@ namespace JTorrent.Tests.BEncode {
         [ExpectedException(typeof(ArgumentException), "data argument cannot have a length of 0.")]
         public void CheckDataEmpty() {
             BEncoding encoding = new BEncoding(new byte[0]);
+        }
+
+        /// <summary>
+        /// Décode une string valide
+        /// </summary>
+        [TestMethod]
+        public void DecodeString() {
+            
+            string data = "11:test string";
+            BEncodedString encoding = new BEncodedString();
+            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+        }
+
+        /// <summary>
+        /// Décode une chaine dont la taille ne correspond pas à sa taille réelle
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(BEncodingException), "String length doesnt fit the size argument.")]
+        public void DecodeTooShortString() {
+
+            string data = "40:tooshort";
+            BEncodedString encoding = new BEncodedString();
+            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
         }
     }
 }

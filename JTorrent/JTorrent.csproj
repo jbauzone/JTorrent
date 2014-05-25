@@ -39,7 +39,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BEncode\BEncodedDictionary.cs" />
+    <Compile Include="BEncode\BEncodedInteger.cs" />
+    <Compile Include="BEncode\BEncodedList.cs" />
+    <Compile Include="BEncode\BEncodedString.cs" />
+    <Compile Include="BEncode\BEncodedValue.cs" />
     <Compile Include="BEncode\BEncoding.cs" />
+    <Compile Include="BEncode\BEncodingException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

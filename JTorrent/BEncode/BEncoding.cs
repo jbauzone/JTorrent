@@ -54,5 +54,41 @@ namespace JTorrent.BEncode {
 
             _data = data;
         }
+
+        public BEncodedValue Decode() {
+
+            Queue<byte> blist = new Queue<byte>(_data);
+
+            char ch = (char)blist.Peek();
+            long integerResult = 0;
+
+            BEncodedValue value = null;
+
+            //cas des dictionnaires
+            if(ch == 'd') {
+                value = new BEncodedDictionary();
+            } 
+            //les listes
+            else if (ch == 'l') {
+                value = new BEncodedList();
+            } 
+            //integer
+            else if (ch == 'i') {
+                value = new BEncodedInteger();
+            } 
+            //une string
+            else if (long.TryParse(ch.ToString(), out integerResult)) {
+                value = new BEncodedString();
+            } 
+            //aucun des types défini, on génère une erreur
+            else {
+                throw new Exception("Unable to find the value to decode.");
+            }
+
+            //on décode la donnée en fonction du type
+            value.Decode(blist);
+
+            return value;
+        }
     }
 }
