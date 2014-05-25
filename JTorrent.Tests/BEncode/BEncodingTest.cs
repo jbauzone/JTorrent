@@ -90,5 +90,15 @@ namespace JTorrent.Tests.BEncode {
             BEncodedString encoding = new BEncodedString();
             encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
         }
+
+        [TestMethod]
+        public void DecodeInteger() {
+
+            string data = "i123456789e";
+            BEncodedInteger encoding = new BEncodedInteger();
+            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+
+            Trace.Flush();
+        }
     }
 }
