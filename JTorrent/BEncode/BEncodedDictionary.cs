@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,20 +23,41 @@ namespace JTorrent.BEncode {
         /// Initialise les données BEncode à décoder avec la chaine de caractères fournie
         /// </summary>
         /// <param name="data"></param>
-        public BEncodedDictionary(string data) : base(data) { }
+        public BEncodedDictionary(string data) : base(data) {
+            Value = new Dictionary<BEncodedString, BEncodedValue>();
+        }
 
         /// <summary>
         /// Initialise les données BEncode à décoder avec le tableau de byte fourni
         /// </summary>
         /// <param name="data"></param>
-        public BEncodedDictionary(byte[] data) : base(data) { }
+        public BEncodedDictionary(byte[] data) : base(data) {
+            Value = new Dictionary<BEncodedString, BEncodedValue>();
+        }
 
         /// <summary>
         /// Décode un dictionnaire BEncoded
         /// </summary>
         /// <param name="stack"></param>
-        public override void Decode(Queue<byte> stack) {
-            throw new NotImplementedException();
+        public override void Decode(Queue<byte> queue) {
+
+            //on supprime la 1ère valeur qui est égale à 'd', qui permettait d'identifier le type de BEncode
+            char ch = (char)queue.Dequeue();
+            
+            //on récupère chacun des caractères tant que nous ne sommes pas à la fin de la queue
+            while((ch = (char)queue.Peek()) != 'e') {
+                
+                //on récupère la clé
+                BEncoding decodingKey = new BEncoding(queue);
+                BEncodedString key = (BEncodedString)decodingKey.Decode();
+
+                //on récupère la valeur
+                BEncoding decodingValue = new BEncoding(queue);
+                BEncodedValue value = decodingValue.Decode();
+
+                //on ajoute la clé / valeur au dico final
+                Value.Add(key, value);
+            }
         }
 
         /// <summary>

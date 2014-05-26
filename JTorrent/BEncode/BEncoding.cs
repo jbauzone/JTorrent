@@ -12,7 +12,7 @@ namespace JTorrent.BEncode {
     /// </summary>
     public class BEncoding {
 
-        private byte[] _data;
+        private Queue<byte> _queue;
 
         /// <summary>
         /// 
@@ -33,7 +33,7 @@ namespace JTorrent.BEncode {
                 throw new FileNotFoundException("The given file was not found.", filePath);
 
             //on récupère tout le fichier sous forme de bytes
-            _data = File.ReadAllBytes(filePath);
+            _queue = new Queue<byte>(File.ReadAllBytes(filePath));
         }
 
         /// <summary>
@@ -52,13 +52,24 @@ namespace JTorrent.BEncode {
             if (data.Length == 0)
                 throw new ArgumentException("data argument cannot have a length of 0.", "data");
 
-            _data = data;
+            _queue = new Queue<byte>(data);
+        }
+
+        public BEncoding(Queue<byte> queue) {
+
+            //data ne peut être null
+            if (queue == null)
+                throw new ArgumentNullException("queue argument cannot be null or empty.", "queue");
+
+            _queue = queue;
         }
 
         public BEncodedValue Decode() {
+            return Decode(_queue);
+        }
 
-            Queue<byte> blist = new Queue<byte>(_data);
-
+        public BEncodedValue Decode(Queue<byte> blist) {
+            
             char ch = (char)blist.Peek();
             long integerResult = 0;
 

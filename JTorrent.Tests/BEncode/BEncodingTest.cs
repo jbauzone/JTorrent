@@ -143,5 +143,20 @@ namespace JTorrent.Tests.BEncode {
 
             Assert.AreEqual(encoding.Value, -123);
         }
+
+        /// <summary>
+        /// Décode un dictionnaire
+        /// </summary>
+        [TestMethod]
+        public void DecodeDictionary() {
+                        
+            string data = "d5:test15:test2e";
+            BEncodedDictionary encoding = new BEncodedDictionary(data);
+            encoding.Decode();
+
+            Assert.AreEqual(encoding.Value.Count, 1);
+            //Assert.AreEqual(encoding.Value.ContainsKey("test1"), true);
+            //Assert.AreEqual(encoding.Value.ContainsValue("test2"), true);
+        }
     }
 }
