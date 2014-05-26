@@ -11,6 +11,8 @@ namespace JTorrent.BEncode {
     /// </summary>
     public class BEncodedList : BEncodedValue {
 
+        public List<BEncodedValue> Value { get; set; }
+
         public override void Decode(Queue<byte> stack) {
             throw new NotImplementedException();
         }

@@ -10,7 +10,9 @@ namespace JTorrent.BEncode {
     /// 
     /// </summary>
     public class BEncodedDictionary : BEncodedValue {
-        
+
+        public Dictionary<BEncodedString, BEncodedValue> Value { get; set; }
+
         public override void Decode(Queue<byte> stack) {
             throw new NotImplementedException();
         }
