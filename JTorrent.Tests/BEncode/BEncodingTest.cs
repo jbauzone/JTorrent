@@ -154,9 +154,22 @@ namespace JTorrent.Tests.BEncode {
             BEncodedDictionary encoding = new BEncodedDictionary(data);
             encoding.Decode();
 
-            Assert.AreEqual(encoding.Value.Count, 1);
+            Assert.AreEqual(1, encoding.Value.Count);
             //Assert.AreEqual(encoding.Value.ContainsKey("test1"), true);
             //Assert.AreEqual(encoding.Value.ContainsValue("test2"), true);
+        }
+
+        /// <summary>
+        /// Décode une liste
+        /// </summary>
+        [TestMethod]
+        public void DecodeList() {
+                        
+            string data = "l4:test5:test25:test3e";
+            BEncodedList encoding = new BEncodedList(data);
+            encoding.Decode();
+
+            Assert.AreEqual(3, encoding.Value.Count);
         }
     }
 }

@@ -38,8 +38,21 @@ namespace JTorrent.BEncode {
         /// Décode une liste BEncode
         /// </summary>
         /// <param name="stack"></param>
-        public override void Decode(Queue<byte> stack) {
-            throw new NotImplementedException();
+        public override void Decode(Queue<byte> queue) {
+           
+            //on supprime la 1ère valeur qui est égale à 'l', qui permettait d'identifier le type de BEncode
+            char ch = (char)queue.Dequeue();
+            
+            //on récupère chacun des caractères tant que nous ne sommes pas à la fin de la queue
+            while((ch = (char)queue.Peek()) != 'e') {
+
+                //on récupère la valeur
+                BEncoding decoding = new BEncoding(queue);
+                BEncodedValue value = decoding.Decode();
+
+                //on ajoute la valeur à la liste
+                Value.Add(value);
+            }
         }
 
         /// <summary>
