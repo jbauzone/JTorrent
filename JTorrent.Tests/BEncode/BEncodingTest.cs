@@ -68,6 +68,19 @@ namespace JTorrent.Tests.BEncode {
             BEncoding encoding = new BEncoding(new byte[0]);
         }
 
+        
+
+        /// <summary>
+        /// Essayer de décoder un entier négatif
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException), "Data field must be set before call Decode method.")]
+        public void DecodeUnitiliazeBEncodedValue() {
+
+            BEncodedInteger encoding = new BEncodedInteger();
+            encoding.Decode();
+        }
+
         /// <summary>
         /// Décode une string valide
         /// </summary>
@@ -75,8 +88,8 @@ namespace JTorrent.Tests.BEncode {
         public void DecodeString() {
             
             string data = "11:test string";
-            BEncodedString encoding = new BEncodedString();
-            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+            BEncodedString encoding = new BEncodedString(data);
+            encoding.Decode();
 
             Assert.AreEqual(encoding.Value, "test string");
         }
@@ -89,8 +102,8 @@ namespace JTorrent.Tests.BEncode {
         public void DecodeTooShortString() {
 
             string data = "40:tooshort";
-            BEncodedString encoding = new BEncodedString();
-            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+            BEncodedString encoding = new BEncodedString(data);
+            encoding.Decode();
         }
 
         /// <summary>
@@ -100,8 +113,8 @@ namespace JTorrent.Tests.BEncode {
         public void DecodeInteger() {
 
             string data = "i123456789e";
-            BEncodedInteger encoding = new BEncodedInteger();
-            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+            BEncodedInteger encoding = new BEncodedInteger(data);
+            encoding.Decode();
 
             Assert.AreEqual(encoding.Value, 123456789);
         }
@@ -114,8 +127,8 @@ namespace JTorrent.Tests.BEncode {
         public void DecodeInvalidInteger() {
 
             string data = "i123dz456789e";
-            BEncodedInteger encoding = new BEncodedInteger();
-            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+            BEncodedInteger encoding = new BEncodedInteger(data);
+            encoding.Decode();
         }
 
         /// <summary>
@@ -125,8 +138,8 @@ namespace JTorrent.Tests.BEncode {
         public void DecodeNegativeInteger() {
 
             string data = "i-123e";
-            BEncodedInteger encoding = new BEncodedInteger();
-            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+            BEncodedInteger encoding = new BEncodedInteger(data);
+            encoding.Decode();
 
             Assert.AreEqual(encoding.Value, -123);
         }

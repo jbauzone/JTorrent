@@ -8,11 +8,25 @@ using System.Threading.Tasks;
 namespace JTorrent.BEncode {
 
     /// <summary>
-    /// 
+    /// Décodage des string BEncode
     /// </summary>
     public class BEncodedString : BEncodedValue {
 
         public string Value { get; set; }
+
+        public BEncodedString() : base() { }
+
+        /// <summary>
+        /// Initialise les données BEncode à décoder avec la chaine de caractères fournie
+        /// </summary>
+        /// <param name="data"></param>
+        public BEncodedString(string data) : base(data) { }
+
+        /// <summary>
+        /// Initialise les données BEncode à décoder avec le tableau de byte fourni
+        /// </summary>
+        /// <param name="data"></param>
+        public BEncodedString(byte[] data) : base(data) { }
 
         /// <summary>
         /// Décode une chaine de caractères
