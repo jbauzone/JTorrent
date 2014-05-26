@@ -171,5 +171,12 @@ namespace JTorrent.Tests.BEncode {
 
             Assert.AreEqual(3, encoding.Value.Count);
         }
+
+        [TestMethod]
+        public void DecodeUbuntu() {
+
+            BEncoding decoding = new BEncoding("ubuntu.torrent");
+            decoding.Decode();
+        }
     }
 }

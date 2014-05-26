@@ -46,15 +46,12 @@
     <Compile Include="BEncode\BEncodedValue.cs" />
     <Compile Include="BEncode\BEncoding.cs" />
     <Compile Include="BEncode\BEncodingException.cs" />
+    <Compile Include="Download\DirectDownload.cs" />
+    <Compile Include="Download\IDownloadable.cs" />
+    <Compile Include="Download\Torrent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <ProjectReference Include="..\JTorrent.Commons\JTorrent.Commons.csproj">
-      <Project>{aa2fd4f4-af33-49f3-b6e4-964c30ae8039}</Project>
-      <Name>JTorrent.Commons</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
