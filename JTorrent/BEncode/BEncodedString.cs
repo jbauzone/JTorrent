@@ -12,6 +12,8 @@ namespace JTorrent.BEncode {
     /// </summary>
     public class BEncodedString : BEncodedValue {
 
+        public string Value { get; set; }
+
         /// <summary>
         /// Décode une chaine de caractères
         /// </summary>
@@ -51,9 +53,7 @@ namespace JTorrent.BEncode {
             char[] tmp = new char[chaine.Count];
             Encoding.Default.GetChars(chaine.ToArray(), 0, chaine.Count, tmp, 0);
 
-            Trace.WriteLine(new string(tmp));
-
-            //return new string(tmp);
+            Value = new string(tmp);
         }
     }
 }

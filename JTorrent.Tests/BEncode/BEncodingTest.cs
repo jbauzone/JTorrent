@@ -77,6 +77,8 @@ namespace JTorrent.Tests.BEncode {
             string data = "11:test string";
             BEncodedString encoding = new BEncodedString();
             encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+
+            Assert.AreEqual(encoding.Value, "test string");
         }
 
         /// <summary>
@@ -91,6 +93,9 @@ namespace JTorrent.Tests.BEncode {
             encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
         }
 
+        /// <summary>
+        /// Décode un entier
+        /// </summary>
         [TestMethod]
         public void DecodeInteger() {
 
@@ -98,7 +103,19 @@ namespace JTorrent.Tests.BEncode {
             BEncodedInteger encoding = new BEncodedInteger();
             encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
 
-            Trace.Flush();
+            Assert.AreEqual(encoding.Value, 123456789);
+        }
+
+        /// <summary>
+        /// Essaye de décoder un entier non valide
+        /// </summary>
+        [TestMethod]
+        [ExpectedException(typeof(BEncodingException), "The value is not a valid integer.")]
+        public void DecodeInvalidInteger() {
+
+            string data = "i123dz456789e";
+            BEncodedInteger encoding = new BEncodedInteger();
+            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
         }
     }
 }

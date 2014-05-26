@@ -12,6 +12,8 @@ namespace JTorrent.BEncode {
     /// </summary>
     public class BEncodedInteger : BEncodedValue {
 
+        public long Value { get; set; }
+
         public override void Decode(Queue<byte> queue) {
 
             char ch = (char)queue.Dequeue();
@@ -21,7 +23,12 @@ namespace JTorrent.BEncode {
                 number += ch;
             }
 
-            Trace.WriteLine(number);
+            long integerValue = 0;
+
+            if (!long.TryParse(number, out integerValue))
+                throw new BEncodingException("The value is not a valid integer.");
+
+            Value = long.Parse(number);
         }
     }
 }
