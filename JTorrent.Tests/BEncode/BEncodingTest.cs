@@ -117,5 +117,18 @@ namespace JTorrent.Tests.BEncode {
             BEncodedInteger encoding = new BEncodedInteger();
             encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
         }
+
+        /// <summary>
+        /// Essayer de décoder un entier négatif
+        /// </summary>
+        [TestMethod]
+        public void DecodeNegativeInteger() {
+
+            string data = "i-123e";
+            BEncodedInteger encoding = new BEncodedInteger();
+            encoding.Decode(new Queue<byte>(Encoding.UTF8.GetBytes(data)));
+
+            Assert.AreEqual(encoding.Value, -123);
+        }
     }
 }
