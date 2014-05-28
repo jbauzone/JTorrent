@@ -10,7 +10,7 @@ namespace JTorrent.BEncode {
     /// <summary>
     /// Décodage des string BEncode
     /// </summary>
-    public class BEncodedString : BEncodedValue {
+    public class BEncodedString : BEncodedValue, IComparable<BEncodedString>, IEquatable<BEncodedString> {
 
         public string Value { get; set; }
 
@@ -68,6 +68,42 @@ namespace JTorrent.BEncode {
             Encoding.Default.GetChars(chaine.ToArray(), 0, chaine.Count, tmp, 0);
 
             Value = new string(tmp);
+        }
+
+        public int CompareTo(BEncodedString other) {
+            return Value.CompareTo(other.Value);
+        }
+
+        public bool Equals(BEncodedString other) {
+            return Value.Equals(other.Value);
+        }
+
+        public override bool Equals(object obj) {
+            
+            if (obj is string)
+                return Value.Equals((string)obj);
+            else if (obj is BEncodedString) {
+                BEncodedString other = (BEncodedString)obj;
+                return Value.Equals(other.Value);
+            }
+
+            return false;            
+        }
+
+        public override string ToString() {
+            return Value;
+        }
+
+        public override int GetHashCode() {
+ 	        return Value.GetHashCode();
+        }
+
+        public static implicit operator BEncodedString(string value) {            
+            return new BEncodedString { Value = value };
+        }
+
+        public static implicit operator string(BEncodedString value) {            
+            return value.Value;
         }
     }
 }

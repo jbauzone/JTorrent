@@ -47,5 +47,9 @@ namespace JTorrent.BEncode {
         /// </summary>
         /// <param name="stack"></param>
         public abstract void Decode(Queue<byte> stack);
+
+        public static implicit operator long(BEncodedValue value) {
+            return (long)value;
+        }
     }
 }

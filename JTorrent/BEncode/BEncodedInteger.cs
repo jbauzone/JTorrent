@@ -10,7 +10,7 @@ namespace JTorrent.BEncode {
     /// <summary>
     /// Classe permettant de décoder des entiers dans le BEncode
     /// </summary>
-    public class BEncodedInteger : BEncodedValue {
+    public class BEncodedInteger : BEncodedValue, IComparable<BEncodedInteger>, IEquatable<BEncodedInteger> {
 
         public long Value { get; set; }
 
@@ -47,6 +47,34 @@ namespace JTorrent.BEncode {
                 throw new BEncodingException("The value is not a valid integer.");
 
             Value = long.Parse(number);
+        }
+
+        public int CompareTo(BEncodedInteger other) {
+            return Value.CompareTo(other.Value);
+        }
+
+        public bool Equals(BEncodedInteger other) {
+            return Value.Equals(other.Value);
+        }
+
+        public override bool Equals(object obj) {
+
+            var other = obj as BEncodedInteger;
+            if(other == null) return false;
+
+            return Equals(other);             
+        }
+
+        public override string ToString() {
+            return Value.ToString();
+        }
+
+        public static implicit operator BEncodedInteger(long value) {
+            return new BEncodedInteger { Value = value };
+        }
+
+        public static implicit operator long(BEncodedInteger value) {
+            return value.Value;
         }
     }
 }
