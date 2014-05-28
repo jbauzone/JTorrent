@@ -53,6 +53,9 @@ namespace JTorrent.BEncode {
                 //on ajoute la valeur à la liste
                 Value.Add(value);
             }
+
+            //suppression de la lettre de fin 'e'
+            queue.Dequeue();
         }
 
         /// <summary>

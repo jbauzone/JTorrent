@@ -58,6 +58,9 @@ namespace JTorrent.BEncode {
                 //on ajoute la clé / valeur au dico final
                 Value.Add(key, value);
             }
+
+            //suppression de la lettre de fin 'e'
+            queue.Dequeue();
         }
 
         /// <summary>
