@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,8 +49,22 @@ namespace JTorrent.BEncode {
         /// <param name="stack"></param>
         public abstract void Decode(Queue<byte> stack);
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static implicit operator long(BEncodedValue value) {
-            return (long)value;
+            return long.Parse(value.ToString());
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static implicit operator string(BEncodedValue value) {
+            return value.ToString();
         }
     }
 }

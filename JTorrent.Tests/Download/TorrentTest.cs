@@ -16,9 +16,7 @@ namespace JTorrent.Tests.Download {
         public void LoadTorrentFromFile() {
 
             Torrent torrent = new Torrent("pirates.torrent");
-            //Assert.AreEqual(1391706680, torrent.CreationDate);
-
-            Trace.Flush();
+            Assert.AreEqual(1231877749, torrent.CreationDate);
         }
     }
 }

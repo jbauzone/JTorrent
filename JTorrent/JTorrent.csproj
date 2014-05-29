@@ -46,6 +46,8 @@
     <Compile Include="BEncode\BEncodedValue.cs" />
     <Compile Include="BEncode\BEncoding.cs" />
     <Compile Include="BEncode\BEncodingException.cs" />
+    <Compile Include="Commons\File.cs" />
+    <Compile Include="Commons\Tracker.cs" />
     <Compile Include="Download\DirectDownload.cs" />
     <Compile Include="Download\IDownloadable.cs" />
     <Compile Include="Download\Torrent.cs" />
