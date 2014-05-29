@@ -33,7 +33,8 @@ namespace JTorrent.BEncode {
         /// </summary>
         /// <param name="stack"></param>
         public override void Decode(Queue<byte> stack) {
-            
+
+            bool isValid = true;
             long integerResult = 0;
             string number = "";
             char ch;
@@ -44,13 +45,10 @@ namespace JTorrent.BEncode {
                 ch = (char)stack.Dequeue();     
                 
                 //si c'est un chiffre, on concatène à la string résultante
-                if(long.TryParse(ch.ToString(), out integerResult))
+                if ((isValid = long.TryParse(ch.ToString(), out integerResult)))
                     number += ch;
-                //la chaine récupéré n'est pas un chiffre
-                else
-                    integerResult = 0;
 
-            } while (integerResult > 0);
+            } while (isValid);
 
             List<byte> chaine = new List<byte>();
             integerResult = long.Parse(number);
@@ -70,14 +68,29 @@ namespace JTorrent.BEncode {
             Value = new string(tmp);
         }
 
+        /// <summary>
+        /// Compare cette instance et indique si cette instance précède, suit ou apparait
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(BEncodedString other) {
             return Value.CompareTo(other.Value);
         }
 
+        /// <summary>
+        /// Détermine si cette instance et celle en argument ont la même valeur
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(BEncodedString other) {
             return Value.Equals(other.Value);
         }
 
+        /// <summary>
+        /// Détermine si cette instance et l'instance passée en argument ont la même valeur
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj) {
             
             if (obj is string)
@@ -90,20 +103,46 @@ namespace JTorrent.BEncode {
             return false;            
         }
 
+        /// <summary>
+        /// Retourne cette instance sous sa forme string
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() {
             return Value;
         }
 
+        /// <summary>
+        /// Retourne le code hash
+        /// </summary>
+        /// <returns></returns>
         public override int GetHashCode() {
  	        return Value.GetHashCode();
         }
 
+        /// <summary>
+        /// Cast implicite vers BEncodedString
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static implicit operator BEncodedString(string value) {            
             return new BEncodedString { Value = value };
         }
 
+        /// <summary>
+        /// Cast implite vers string
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static implicit operator string(BEncodedString value) {            
             return value.Value;
         }
+
+        //opérateurs
+        public static bool operator ==(BEncodedString a, BEncodedString b) { return a.Equals(b); }
+        public static bool operator !=(BEncodedString a, BEncodedString b) { return !(a.Equals(b)); }
+        public static bool operator ==(BEncodedString a, string b) { return a.Equals(b); }
+        public static bool operator !=(BEncodedString a, string b) { return !(a.Equals(b)); }
+        public static bool operator ==(string a, BEncodedString b) { return b.Equals(a); }
+        public static bool operator !=(string a, BEncodedString b) { return !b.Equals(a); }
     }
 }

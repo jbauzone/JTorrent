@@ -59,7 +59,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Recherche l'occurrence et retourne l'index de la première occurence
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -68,7 +68,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Ajoute l'élément à l'index donné
         /// </summary>
         /// <param name="index"></param>
         /// <param name="item"></param>
@@ -77,7 +77,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Supprime l'élément à l'index donné
         /// </summary>
         /// <param name="index"></param>
         public void RemoveAt(int index) {
@@ -98,7 +98,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Ajoute l'élément à la liste
         /// </summary>
         /// <param name="item"></param>
         public void Add(BEncodedValue item) {
@@ -106,14 +106,14 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Supprime tous les éléments de la liste
         /// </summary>
         public void Clear() {
             Value.Clear();
         }
 
         /// <summary>
-        /// 
+        /// Indique si l'objet est contenu dans la liste
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -131,21 +131,21 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Retourne le nombre d'éléments de la liste
         /// </summary>
         public int Count {
             get { return Value.Count; }
         }
 
         /// <summary>
-        /// 
+        /// Retourne toujours false
         /// </summary>
         public bool IsReadOnly {
             get { return false; }
         }
 
         /// <summary>
-        /// 
+        /// Supprime l'élement de la liste
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -154,7 +154,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Retourne un énumérateur qui itérate la collection
         /// </summary>
         /// <returns></returns>
         public IEnumerator<BEncodedValue> GetEnumerator() {
@@ -162,7 +162,7 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
-        /// 
+        /// Retourne un énumérateur qui itérate la collection
         /// </summary>
         /// <returns></returns>
         IEnumerator IEnumerable.GetEnumerator() {

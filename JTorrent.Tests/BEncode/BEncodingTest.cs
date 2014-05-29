@@ -172,11 +172,19 @@ namespace JTorrent.Tests.BEncode {
             Assert.AreEqual(3, encoding.Value.Count);
         }
 
+        /// <summary>
+        /// Décode un fichier existant
+        /// </summary>
         [TestMethod]
-        public void DecodeUbuntu() {
+        public void DecodeExistingFile() {
 
             BEncoding decoding = new BEncoding("ubuntu.torrent");
-            decoding.Decode();
+            BEncodedDictionary values = (BEncodedDictionary)decoding.Decode();
+
+            Assert.AreEqual("http://torrent.ubuntu.com:6969/announce", values["announce"].ToString());
+            Assert.AreEqual(values["announce"], "http://torrent.ubuntu.com:6969/announce");
+            Assert.IsTrue(values["announce"].Equals("http://torrent.ubuntu.com:6969/announce"));
+            Assert.IsTrue("http://torrent.ubuntu.com:6969/announce".Equals(values["announce"].ToString()));
         }
     }
 }

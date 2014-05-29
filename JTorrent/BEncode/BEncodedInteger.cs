@@ -49,14 +49,29 @@ namespace JTorrent.BEncode {
             Value = long.Parse(number);
         }
 
+        /// <summary>
+        /// Compare cette instance et indique si cette instance précède, suit ou apparait
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public int CompareTo(BEncodedInteger other) {
             return Value.CompareTo(other.Value);
         }
 
+        /// <summary>
+        /// Détermine si cette instance et celle en argument ont la même valeur
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
         public bool Equals(BEncodedInteger other) {
             return Value.Equals(other.Value);
         }
 
+        /// <summary>
+        /// Détermine si cette instance et l'instance passée en argument ont la même valeur
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public override bool Equals(object obj) {
 
             var other = obj as BEncodedInteger;
@@ -65,16 +80,38 @@ namespace JTorrent.BEncode {
             return Equals(other);             
         }
 
+        /// <summary>
+        /// Retourne cette instance sous sa représentation en chaine
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() {
             return Value.ToString();
         }
 
+        /// <summary>
+        /// Cast implicite vers BEncodedInteger
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static implicit operator BEncodedInteger(long value) {
             return new BEncodedInteger { Value = value };
         }
 
+        /// <summary>
+        /// Cast implicite vers long
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         public static implicit operator long(BEncodedInteger value) {
             return value.Value;
         }
+
+        //opérateurs
+        public static bool operator ==(BEncodedInteger a, BEncodedInteger b) { return a.Equals(b); }
+        public static bool operator !=(BEncodedInteger a, BEncodedInteger b) { return !(a.Equals(b)); }
+        public static bool operator ==(BEncodedInteger a, long b) { return a.Equals(b); }
+        public static bool operator !=(BEncodedInteger a, long b) { return !(a.Equals(b)); }
+        public static bool operator ==(long a, BEncodedInteger b) { return b.Equals(a); }
+        public static bool operator !=(long a, BEncodedInteger b) { return !b.Equals(a); }
     }
 }

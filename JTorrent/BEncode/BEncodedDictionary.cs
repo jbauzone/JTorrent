@@ -151,6 +151,11 @@ namespace JTorrent.BEncode {
             return Value.Contains(item);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="array"></param>
+        /// <param name="arrayIndex"></param>
         public void CopyTo(KeyValuePair<BEncodedString, BEncodedValue>[] array, int arrayIndex) {
             throw new NotImplementedException();
         }
