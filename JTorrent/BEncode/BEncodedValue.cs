@@ -50,6 +50,12 @@ namespace JTorrent.BEncode {
         public abstract void Decode(Queue<byte> stack);
 
         /// <summary>
+        /// Retourne la représentation BEncoded de cette valeur
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetEncodedValue();
+
+        /// <summary>
         /// 
         /// </summary>
         /// <param name="value"></param>

@@ -59,6 +59,23 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
+        /// Retourne la représentation BEncoded de cette valeur
+        /// </summary>
+        /// <returns></returns>
+        public override string GetEncodedValue() {
+
+            StringBuilder builder = new StringBuilder("l");
+
+            foreach (BEncodedValue item in Value) {
+                builder.AppendFormat("{0}", item.GetEncodedValue());
+            }
+
+            builder.Append("e");
+
+            return builder.ToString();
+        }
+
+        /// <summary>
         /// Recherche l'occurrence et retourne l'index de la première occurence
         /// </summary>
         /// <param name="item"></param>

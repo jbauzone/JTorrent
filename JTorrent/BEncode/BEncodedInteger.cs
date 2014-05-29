@@ -50,6 +50,14 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
+        /// Retourne la représentation BEncoded de cette valeur
+        /// </summary>
+        /// <returns></returns>
+        public override string GetEncodedValue() {
+            return string.Format("i{0}e", Value);
+        }
+
+        /// <summary>
         /// Compare cette instance et indique si cette instance précède, suit ou apparait
         /// </summary>
         /// <param name="other"></param>

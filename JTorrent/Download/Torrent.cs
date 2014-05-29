@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using JTorrent.BEncode;
@@ -103,6 +104,19 @@ namespace JTorrent.Download {
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// Calcule le hash du dictionnaire "info"
+        /// </summary>
+        /// <returns></returns>
+        public string GetInfoHash() {
+
+            if (_data == null)
+                throw new ArgumentNullException("_data", "_data cannot be null.");
+
+            return BitConverter.ToString(SHA1.Create().
+                ComputeHash(Encoding.Default.GetBytes(_data["info"].GetEncodedValue()))).Replace("-", "");
         }
 
         public void Download() {

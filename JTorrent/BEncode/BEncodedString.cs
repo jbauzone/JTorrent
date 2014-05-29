@@ -69,6 +69,14 @@ namespace JTorrent.BEncode {
         }
 
         /// <summary>
+        /// Retourne la représentation BEncoded de cette valeur
+        /// </summary>
+        /// <returns></returns>
+        public override string GetEncodedValue() {
+            return string.Format("{0}:{1}", Value.Length, Value);
+        }
+
+        /// <summary>
         /// Compare cette instance et indique si cette instance précède, suit ou apparait
         /// </summary>
         /// <param name="other"></param>
