@@ -75,7 +75,7 @@ namespace JTorrent.Download {
                 Comment = _data["comment"];
 
             if (_data.ContainsKey("announce"))
-                Trackers.Add(new Tracker(_data["announce"]));
+                Trackers.Add(new Tracker(_data["announce"], this));
 
             if (_data.ContainsKey("info")) {
 
