@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using JTorrent.Tests.Commons;
 
 namespace JTorrent.Tests.BEncode {
 
@@ -67,8 +68,6 @@ namespace JTorrent.Tests.BEncode {
         public void CheckDataEmpty() {
             BEncoding encoding = new BEncoding(new byte[0]);
         }
-
-        
 
         /// <summary>
         /// Essayer de décoder un entier négatif
@@ -178,13 +177,10 @@ namespace JTorrent.Tests.BEncode {
         [TestMethod]
         public void DecodeExistingFile() {
 
-            BEncoding decoding = new BEncoding("ubuntu.torrent");
+            BEncoding decoding = new BEncoding(Tools.GetTestDataFilePath("ubuntu-15.04-desktop-amd64.iso.torrent"));
             BEncodedDictionary values = (BEncodedDictionary)decoding.Decode();
 
             Assert.AreEqual("http://torrent.ubuntu.com:6969/announce", values["announce"].ToString());
-            Assert.AreEqual(values["announce"], "http://torrent.ubuntu.com:6969/announce");
-            Assert.IsTrue(values["announce"].Equals("http://torrent.ubuntu.com:6969/announce"));
-            Assert.IsTrue("http://torrent.ubuntu.com:6969/announce".Equals(values["announce"].ToString()));
         }
     }
 }
