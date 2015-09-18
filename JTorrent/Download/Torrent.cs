@@ -107,7 +107,7 @@ namespace JTorrent.Download {
         }
 
         /// <summary>
-        /// Calcule le hash du dictionnaire "info"
+        /// Récupère le hash du dictionnaire "info"
         /// </summary>
         /// <returns></returns>
         public string GetInfoHash() {
@@ -118,9 +118,20 @@ namespace JTorrent.Download {
             return BitConverter.ToString(SHA1.Create().
                 ComputeHash(Encoding.Default.GetBytes(_data["info"].GetEncodedValue()))).Replace("-", "");
         }
+        
+        /// <summary>
+        /// Récupère le info_hash encodé pour être transmis via url
+        /// </summary>
+        /// <returns></returns>
+        public string GetEncodedInfoHash() {
+            return UriHelper.UrlEncode(GetInfoHash());
+        }
 
         public void Download() {
-            throw new NotImplementedException();
+
+            foreach(Tracker tracker in Trackers) {
+                tracker.Request();    
+            }
         }
     }
 }

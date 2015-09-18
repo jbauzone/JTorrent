@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,6 +50,7 @@
     <Compile Include="BEncode\BEncodingException.cs" />
     <Compile Include="Commons\File.cs" />
     <Compile Include="Commons\Tracker.cs" />
+    <Compile Include="Commons\UriHelper.cs" />
     <Compile Include="Download\DirectDownload.cs" />
     <Compile Include="Download\IDownloadable.cs" />
     <Compile Include="Download\Torrent.cs" />

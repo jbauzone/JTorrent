@@ -31,19 +31,11 @@ namespace JTorrent.Commons {
 
         public void Request() {
 
-            //on récupère l'info hash de ce torrent
-            string hash = Torrent.GetInfoHash();
-
-            StringBuilder infoHash = new StringBuilder();
-
-            //on échappe chacun des caractères
-            for(int i = 0; i < hash.Length; i = i+2) {
-                infoHash.AppendFormat("%{0}{1}", hash[i], hash[i+1]);
-            }
+            string encoded_hash = Torrent.GetEncodedInfoHash();
 
             //construction de la requête vers le tracker
-            StringBuilder builder = new StringBuilder(string.Format("{0}?info_hash={1}", Url, infoHash.ToString()));
-            builder.AppendFormat("&peer_id=adkiepeycosozpsngtoi&uploaded=0&downloaded=0&compact=1&numwant=50&left=120000&event=started");
+            StringBuilder builder = new StringBuilder(string.Format("{0}?info_hash={1}", Url, encoded_hash));
+            builder.AppendFormat("&peer_id=adkiepeycosozpsngtoi&uploaded=0&downloaded=0&compact=1&numwant=50&left=120000&event=started&port=6881");
 
             //création de la requête GET
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(builder.ToString());
