@@ -25,11 +25,11 @@ namespace JTorrent.Download {
         public long PieceLength { get; set; }
         public string Pieces { get; set; }
         public List<File> Files { get; set; }
-        public List<Tracker> Trackers { get; set; }
+        public List<TorrentTracker> Trackers { get; set; }
 
         public Torrent() {
             Files = new List<File>();
-            Trackers = new List<Tracker>();
+            Trackers = new List<TorrentTracker>();
         }
 
         /// <summary>
@@ -74,8 +74,11 @@ namespace JTorrent.Download {
             if (_data.ContainsKey("comment"))
                 Comment = _data["comment"];
 
-            if (_data.ContainsKey("announce"))
-                Trackers.Add(new Tracker(_data["announce"], this));
+            if (_data.ContainsKey("announce")) {
+
+                Tracker tracker = new Tracker(_data["announce"]);
+                Trackers.Add(new TorrentTracker(this, tracker));
+            }
 
             if (_data.ContainsKey("info")) {
 
@@ -129,7 +132,7 @@ namespace JTorrent.Download {
 
         public void Download() {
 
-            foreach(Tracker tracker in Trackers) {
+            foreach(TorrentTracker tracker in Trackers) {
                 tracker.Request();    
             }
         }
