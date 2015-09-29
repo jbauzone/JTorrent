@@ -49,6 +49,8 @@
     <Compile Include="BEncode\BEncoding.cs" />
     <Compile Include="BEncode\BEncodingException.cs" />
     <Compile Include="Commons\File.cs" />
+    <Compile Include="Commons\Peer.cs" />
+    <Compile Include="Commons\TorrentTracker.cs" />
     <Compile Include="Commons\Tracker.cs" />
     <Compile Include="Commons\UriHelper.cs" />
     <Compile Include="Download\DirectDownload.cs" />
